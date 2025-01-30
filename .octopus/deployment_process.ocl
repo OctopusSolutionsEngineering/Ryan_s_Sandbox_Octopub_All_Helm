@@ -6,8 +6,24 @@ step "deploy-octopub-database" {
         properties = {
             Octopus.Action.DeployRelease.DeploymentCondition = "IfNotCurrentVersion"
             Octopus.Action.DeployRelease.ProjectId = "octopub-database-helm"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
+    }
+}
+
+step "hello-world" {
+    name = "Hello world"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = "Write-highlight \"Hello world\""
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool = "hosted-ubuntu"
     }
 }
 
@@ -19,6 +35,7 @@ step "deploy-octopub-audits" {
         properties = {
             Octopus.Action.DeployRelease.DeploymentCondition = "IfNotCurrentVersion"
             Octopus.Action.DeployRelease.ProjectId = "octopub-audits-helm"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
     }
@@ -33,6 +50,7 @@ step "deploy-octopub-products" {
         properties = {
             Octopus.Action.DeployRelease.DeploymentCondition = "IfNotCurrentVersion"
             Octopus.Action.DeployRelease.ProjectId = "octopub-products-helm"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
     }
@@ -46,6 +64,7 @@ step "deploy-octopub-frontend" {
         properties = {
             Octopus.Action.DeployRelease.DeploymentCondition = "IfNotCurrentVersion"
             Octopus.Action.DeployRelease.ProjectId = "octopub-frontend-helm"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
     }
